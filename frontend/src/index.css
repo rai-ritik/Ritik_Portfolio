@@ -1,0 +1,7 @@
+/* index.css intentionally minimal — this project uses a static
+   HTML/CSS/JS portfolio served from /app/frontend/public/.
+   The React app renders null; we only keep Tailwind base for the
+   (invisible) React root to avoid build errors. */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
