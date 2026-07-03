@@ -1,0 +1,31 @@
+{
+  "summary": "Re-verified image additions (hero portrait, logo strip, experience/education card logos) on the static portfolio at https://ai-strategy-hub-41.preview.emergentagent.com/. All 6 image assets return HTTP 200, all <img> elements load successfully (naturalWidth > 0), hero-portrait + Trento tag are visible, logo-strip contains all 5 expected logos and sits between hero and about sections, and every experience/education card contains a loaded logo <img> inside its .tl-card__logo / .edu-card__logo wrapper. Desktop (1440px) hero__layout uses 2 grid tracks (602px text | 446px portrait); mobile (375px) collapses to 1 column with portrait moved above text via order:-1. No console errors and no /logos/* 404s.",
+  "tested_scope": ["frontend"],
+  "passed": [
+    "data-testid=hero-portrait exists & visible; hero-portrait-img src=/logos/headshot-placeholder.svg loaded (naturalWidth=400)",
+    "Trento tag pill (.hero__portrait-tag) visible with text 'Trento, IT'",
+    "data-testid=logo-strip exists between hero (top=0) and about (top=1044) at strip top=918",
+    "logo-fbk (fbk.png nw=636), logo-unitn (unitn.svg nw=568), logo-maastricht (maastricht.svg nw=660), logo-insa (insa-rouen.jpg nw=600), logo-doctaa (doctaa.svg nw=200) all loaded",
+    "exp-fbk/exp-insa/exp-unitn/exp-doctaa each contain .tl-card__logo img that loaded (nw=636/600/568/200)",
+    "edu-unitn (unitn.svg nw=568) and edu-maastricht (maastricht.svg nw=660) each contain .edu-card__logo img that loaded",
+    "All 6 /logos/* URLs return HTTP 200",
+    "Desktop 1440px: .hero__layout is display:grid with 2 tracks (grid-template-columns='602.031px 445.969px')",
+    "Mobile 375px: .hero__layout collapses to 1 column (335px); .hero__portrait has order=-1 and appears above .hero__text (portraitTop=120, textTop=340)",
+    "No console errors; only unrelated failed request is Cloudflare RUM beacon (/cdn-cgi/rum) which is not an app asset"
+  ],
+  "failed": [],
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Minor: .tl-card__logo and .edu-card__logo are <span> wrappers around the actual <img>; the review request phrasing 'a .tl-card__logo <img>' could suggest the class is on the img itself. Current markup is fine (span wrapper -> img child) and images load. No action required."
+  ],
+  "updated_files": [],
+  "success_rate": {"backend": "N/A (not requested)", "frontend": "100%"},
+  "test_credentials": "N/A - static site, no auth",
+  "seed_data_creation": "None",
+  "retest_needed": false,
+  "should_main_agent_self_test": false,
+  "context_for_next_testing_agent": "Iteration 2 verified all image additions load correctly at 1440px desktop and 375px mobile. Logo assets live in /app/frontend/public/logos/. Hero portrait uses SVG headshot placeholder with 'RR' initials. Iteration 1 covered nav/CTAs/sections/hamburger — no need to retest those."
+}
